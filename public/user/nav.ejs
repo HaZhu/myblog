@@ -1,0 +1,79 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <a class="navbar-brand page-scroll" href="/">猫咪的猫咪</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="/">我的首页</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/archive">博客列表</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/megBoard">留言版</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/game">游戏空间</a>
+                </li>
+                 <li>
+                    <a class="page-scroll" id="lts" href="#">聊天室</a>
+                </li>
+                <li>
+                    <a id="who" class="page-scroll" href="#">来者何人</a>
+                </li>
+                <li id="headImgBoxLi">
+                   <a id="headImgBox">
+                        <img id="headImg" src="">
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<%- include('./js.ejs') %>
+<script>
+//    localStorage.userName="";
+    if(!localStorage.userName){
+        localStorage.userName="";
+    }
+    if(localStorage.userName!=""){
+        $("#who").html('欢迎你,'+localStorage.userName);
+        $("#who").attr('href','/contact');
+        $("#headImgBoxLi").show();
+        $("#headImgBoxLi").find("img").attr('src',localStorage.headImg);
+    }
+    $("#who").click(function(){
+        if(localStorage.userName==""){
+            layer.open({
+                type: 2,
+                title: false,
+                content: ['/login', 'no'],
+                area: ['800px', '600px'],
+                anim: 3,
+                offset: '120px'
+            })
+        }
+    })
+    $("#lts").click(function(){
+        if(localStorage.userName==""){
+            layer.open({
+                type: 2,
+                title: false,
+                content: ['/login', 'no'],
+                area: ['800px', '600px'],
+                anim: 3,
+                offset: '120px'
+            })
+        }else{
+            location.href='/chatroom'
+        }
+    })
+</script>

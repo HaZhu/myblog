@@ -1,0 +1,173 @@
+<html>
+<%- include('../public/user/head.ejs') %>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial";
+        }
+        
+        body {
+            background: #222222
+        }
+        
+        #main {
+            width: 962px;
+            height: auto;
+            margin: 10px auto;
+        }
+        
+        #main ul {
+            list-style: none;
+            clear:both;
+            overflow:hidden;
+            margin-top:100px;
+        }
+        
+        #main ul li {
+            width: 320px;
+            height: 360px;
+            float: left;
+            position: relative;
+            margin:20px 0 80px;
+        }
+        
+        #main ul li img {
+            border: 10px solid #F5F5F5;
+            height:100%;
+            width:100%;
+            -webkit-transition: 1s ease;
+            -moz-transition: 1s ease;
+        }
+        
+        #main .info {
+            width: 240px;
+            height: 160px;
+            border: 10px solid #F5F5F5;
+            background: #deddcd;
+            position: absolute;
+            bottom: -50px;
+            right:0px;
+            -webkit-transition: 1s ease;
+            -moz-transition: 1s ease;
+            -moz-transform: rotatey(30deg);
+            -webkit-transform: rotatey(30deg);
+        }
+        
+        #main .info h2 {
+            text-align: center;
+            line-height: 50px;
+            color: #7a3f3a;
+            font-weight: normal;
+            font-size: 20px;
+            margin:0;
+        }
+        
+        #main .info p {
+            padding: 0 20px;
+            font-size: 14px;
+            margin:0;
+            padding:0;
+        }
+        
+        #main .info a {
+            display: block;
+            width: 100px;
+            height: 30px;
+            background: #7a3f3a;
+            color: #FFF;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 30px;
+            position:absolute;
+            bottom:5px;
+            left:50%;
+            margin-left:-50px;
+        }
+        
+        #main ul li:hover .info {
+            -webkit-transform: rotatey(0deg);
+            -moz-transform: rotatey(0deg);
+            right: 40px;
+            bottom: -70px;
+        }
+        
+        #main ul li:hover img {
+            -webkit-transform: rotatey(360deg);
+            -moz-transform: rotatey(360deg);
+        }
+    </style>
+<body>
+    <%- include('../public/user/nav.ejs') %>
+    <div id="main">
+        <ul>
+            <li> <img src="user/game/img/1.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>扫雷游戏</h2>
+                    <p>这是一款用jq开发的扫雷游戏</p>
+                    <a href="/saolei" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/9.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>蓝宝石方块</h2>
+                    <p>这是一款用jq开发的蓝宝石方块游戏...</p>
+                    <a href="/lbs" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/4.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>三国杀连连看</h2>
+                    <p>这是一款用jq开发的连连看游戏...</p>
+                    <a href="/sgsllk" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/5.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>推箱子</h2>
+                    <p>这是一款用jq开发的推箱子游戏...</p>
+                    <a href="/tuixzi" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/6.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>跳舞机</h2>
+                    <p>这是一款用jq开发的跳舞机游戏...</p>
+                    <a href="/twj" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/7.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>桌球</h2>
+                    <p>这是一款用jq开发的桌球游戏...</p>
+                    <a href="/zhouqiu" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/8.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>见缝插针</h2>
+                    <p>这是一款用jq开发的小游戏...</p>
+                    <a href="/jfcz" target="_blank">开始游戏</a>
+                </div>
+            </li>
+             <li> <img src="user/game/img/2.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>雷霆战机</h2>
+                    <p>这是一款用jq开发的雷霆战机游戏...</p>
+                    <a href="/dafeiji" target="_blank">开始游戏</a>
+                </div>
+            </li>
+            <li> <img src="user/game/img/3.png" alt="Iron Man 1" width="300" height="450" />
+                <div class="info">
+                    <h2>贪吃蛇</h2>
+                    <p>这是一款用jq开发的贪吃蛇小游戏...</p>
+                    <a href="/tcs" target="_blank">开始游戏</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>$('.nav a').eq(3).addClass('active');</script>
+    <%- include('../public/user/footer.ejs') %>
+</body>
+</html>

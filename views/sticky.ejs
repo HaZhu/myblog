@@ -1,0 +1,33 @@
+
+<!DOCTYPE html> 
+<html lang="en"><!--  manifest="./cache.manifest"  -->
+  <head> 
+    <meta charset=utf-8> 
+    <title>Sticky Thing </title> 
+	<meta name="description" content="Sticky Thing" /> 
+	<meta name="keywords" content="experiment,html5,javascript,canvas,css3,interactive,physics,demo,mobile,web-based,iphone,android" />
+    <meta name="viewport" content="height=device-height,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon-precomposed" href="user/sticky/img/apple-touch-icon.png"/> 
+    <link rel="apple-touch-startup-image" href="user/sticky/img/apple-touch-startup-image.png">
+    <link rel="stylesheet" href="user/sticky/css/sticky.css">
+  </head> 
+  <body>
+    <div id="out">&nbsp;</div>
+        <canvas id="bigCanvas">Throw it around and see if it sticks.<br><br>You need a newer browser.<br>In the meantime please try the <a href="http://spielzeugz.de/lab/sticky-thing/flash">Flash version</a>.</canvas>
+        <div id="iconBar">
+            <div class="ico-btn" id="infoBTN"><div class="ico-hit"></div><div class="ico-ico-info"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////////VXz1bAAAAAJ0Uk5T/wDltzBKAAAAT0lEQVR42uzUuw0AMAhDwZf9l44yQEBGKQIy/RWYD6tUmJn1YZySGQTuF1bsbeq4IczxwqixdGwjmBoJfZi6kwxm2RFky4VfkJnZM7YFGACj+QrIDs75qgAAAABJRU5ErkJggg==" width="27" height="27" /></div></div>
+            <div class="ico-btn" id="optionsBTN"><div class="ico-hit"></div><div class="ico-ico-gears"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF/v7+/f39////////uwDIMAAAAAR0Uk5T////AEAqqfQAAABvSURBVHja7NVLCsAgDATQSbz/nUsoUmxjSSyKhZmNijyQ+EMZCsjIyO5RS9OJM73aFKvZj2knmzMgx2zWiARYaVdlBE410au+M5jA1GMa3+7nKMLOuqeYYGy7ZdHh+sU1/fwE5R88fh1kZO85BBgAUbsgdHGHgrIAAAAASUVORK5CYII=" width="27" height="27" /></div></div>
+        </div>
+    <div id="stickyContainer"></div>
+    <div id="navContainer">
+        <div id="nav">
+            <a href="javascript:void(0)" id="options">options</a>
+            <span class="pipe" id="navPipe">|</span> 
+            <span id="homeLink"><a href="http://www.spielzeugz.de/lab">spielzeugz.de<span class="slashWithSpace">/</span>lab</a></span>  
+        </div>
+    </div>
+    <script src="user/sticky/js/sticky.js"></script>
+</body>
+</html>

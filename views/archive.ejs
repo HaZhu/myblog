@@ -1,0 +1,87 @@
+<html>
+<%- include('../public/user/head.ejs') %>
+
+    <body class="sub-page">
+        <!-- Navigation -->
+        <%- include('../public/user/nav.ejs') %>
+            <!-- Navigation -->
+            <!-- Background Gradients-->
+            <div class="site-gradients">
+                <div class="site-gradients-media">
+                    <figure>
+                        <img src="Another%20Yosemite%20short%20movie%20project%20%E2%80%93%20Modern_files/PcLGXNjMTdiFVKTrElCl__DSC2245.jpg" alt="PcLGXNjMTdiFVKTrElCl__DSC2245" srcset="https://themedemos.webmandesign.eu/modern/wp-content/uploads/sites/8/2014/11/PcLGXNjMTdiFVKTrElCl__DSC2245.jpg 1920w, https://themedemos.webmandesign.eu/modern/wp-content/uploads/sites/8/2014/11/PcLGXNjMTdiFVKTrElCl__DSC2245-420x280.jpg 420w, https://themedemos.webmandesign.eu/modern/wp-content/uploads/sites/8/2014/11/PcLGXNjMTdiFVKTrElCl__DSC2245-744x497.jpg 744w, https://themedemos.webmandesign.eu/modern/wp-content/uploads/sites/8/2014/11/PcLGXNjMTdiFVKTrElCl__DSC2245-1200x801.jpg 1200w" sizes="(max-width: 1617px) 100vw, 1617px" height="1080" width="1617">
+                    </figure>
+                </div>
+            </div>
+            <%- include('../public/user/header.ejs') %>
+                <!-- Content -->
+                    <div id="page-content">
+                        <section class="box-content box-1">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <% dataOne.forEach(function(datas){ %>  
+                                            <div class="box-item">
+                                            <img src="<%=datas.blogImg%>" class="img-responsive" />
+                                            <div class="content">
+                                                <h3><%=datas.blogName%></h3>
+                                                <p><%=datas.blogContent%></p>
+                                                <a href="/single:<%=datas.id%>">Read More...</a>
+                                                <br>
+                                                <br>
+                                                <span>发布时间：<%=datas.blogTime%></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                       <% }) %> 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <% dataTwo.forEach(function(datas){ %>  
+                                            <div class="box-item">
+                                            <img src="<%=datas.blogImg%>" class="img-responsive" />
+                                            <div class="content">
+                                                <h3><%=datas.blogName%></h3>
+                                                <p><%=datas.blogContent%></p>
+                                                <a href="/single:<%=datas.id%>">Read More...</a>
+                                                <br>
+                                                <br>
+                                                <span>发布时间：<%=datas.blogTime%></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                       <% }) %> 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <% dataThree.forEach(function(datas){ %>  
+                                            <div class="box-item">
+                                            <img src="<%=datas.blogImg%>" class="img-responsive" />
+                                            <div class="content">
+                                                <h3><%=datas.blogName%></h3>
+                                                <p><%=datas.blogContent%></p>
+                                                <a href="/single:<%=datas.id%>">Read More...</a>
+                                                <br>
+                                                <br>
+                                                <span><%=datas.blogTime%></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                       <% }) %> 
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+    
+                <!-- FOOTER -->
+                <%- include('../public/user/footer.ejs') %>
+                    <script>
+                        $('.nav a').eq(1).addClass('active');
+                    </script>
+                    <script type="text/javascript" id="bdshare_js" data="type=tools"></script>
+                    <script type="text/javascript" id="bdshell_js"></script>
+                    <script type="text/javascript">
+                        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+                    </script>
+    </body>
+
+</html>

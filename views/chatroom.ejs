@@ -1,0 +1,325 @@
+<html>
+<%- include('../public/user/head.ejs') %>
+    <style>
+        ::-webkit-scrollbar {
+            /*    width: .16rem;*/
+            width: 8px;
+            height: 0rem;
+            background-color: #2E2F32;
+        }
+        /*定义滚动条轨道 内阴影+圆角*/
+        
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 0.06rem rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            background-color: #707378;
+        }
+        /*定义滑块 内阴影+圆角*/
+        
+        ::-webkit-scrollbar-thumb {
+            /*    border-radius: 10px;*/
+            border-radius: 3px;
+            -webkit-box-shadow: inset 0 0 0.06rem rgba(0, 0, 0, .3);
+            background-color: #fff;
+        }
+        
+        header.container {
+            min-height: 180px;
+            color: #fff;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        #page-content {
+            margin-bottom: 60px;
+        }
+        
+        .chatBox {
+            box-shadow: 1px 1px 3px #282828;
+        }
+        
+        .chatBoxLeft {
+            height: 500px;
+            background: #1e73dd;
+            overflow-y: auto;
+        }
+        
+        .chatBoxRight {
+            height: 500px;
+            background: #e1e8f5;
+            position: relative;
+        }
+        
+        .chatBoxLeft ul {
+            height: auto;
+            overflow: hidden;
+            width: 100%;
+            clear: both;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .chatBoxLeft li {
+            float: left;
+            padding: 0;
+            margin: 10px 0;
+            height: 42px;
+            width: 100%;
+            line-height: 42px;
+            font-size: 16px;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .chatBoxLeft li>img {
+            width: 40px;
+            vertical-align: middle;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .chatBoxLeft li>span {
+            margin-left: 15px;
+        }
+        
+        .charBoxRtTop {
+            width: 100%;
+            height: 75%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+        }
+        
+        .charBoxRtBt {
+            width: 100%;
+            height: 25%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            border: 0;
+            border-top: 1px solid #d0d5e1;
+            margin: 0;
+            padding: 0;
+            line-height: 20px;
+            color: #000;
+            padding-left: 5px;
+            padding-top: 10px;
+            resize: none;
+        }
+        
+        .charBoxRtTop ul {
+            height: auto;
+            overflow: hidden;
+            width: 100%;
+            clear: both;
+            padding: 15px;
+            margin: 0;
+        }
+        
+        .charBoxRtTop li {
+            float: left;
+            padding: 0;
+            margin: 10px 0;
+            width: 100%;
+            font-size: 16px;
+            color: #000;
+            position: relative;
+        }
+        
+        .liLeftImgBox {
+            width: 50px;
+            position: absolute;
+            left: 0px;
+            text-align: center;
+            top: 0;
+        }
+        
+        .liRightBox {
+            margin-left: 55px;
+        }
+        
+        .liRightImgBox {
+            width: 50px;
+            text-align: center;
+            float: right;
+        }
+        
+        .liLeftBox {
+            float: right;
+            width: calc(100% - 60px);
+            padding-top: 10px;
+            text-align:right;
+        }
+        
+        .charBoxRtTop li .liLeftImgBox img {
+            width: 40px;
+            vertical-align: middle;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .charBoxRtTop li .liRightImgBox img {
+            width: 40px;
+            vertical-align: middle;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .setCont {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #1e73dd;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #fff;
+            width: 80px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .exitCont {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #1e73dd;
+            position: absolute;
+            bottom: 10px;
+            right: 110px;
+            color: #fff;
+            width: 80px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+    <body class="sub-page">
+        <!-- Navigation -->
+        <%- include('../public/user/nav.ejs') %>
+            <header class="container" id="username"></header>
+            <!-- Content -->
+            <div id="page-content" style="margin-bottom:60px;">
+                <section class="box-content box-1">
+                    <div class="container">
+                        <div class="row chatBox">
+
+                            <div class="col-md-3 chatBoxLeft">
+                                <ul id="userUl">
+
+                                </ul>
+                            </div>
+
+                            <div class="col-md-9 chatBoxRight">
+                                <div class="charBoxRtTop">
+                                    <ul id="msgBoxAppend">
+                                        <!--
+                                        <li>
+                                            <div class="liLeftImgBox">
+                                                <img src="user/images/public/head.png" alt="">
+                                            </div>
+                                            <div class="liRightBox">
+                                                <span>猫咪的猫咪</span>
+                                                <div class="chatBoxDiv">访问飞娃儿分</div>
+                                            </div>
+                                        </li>
+-->
+<!--
+                                        <li>
+                                            <div class="liRightImgBox">
+                                                <img src="user/images/public/head.png" alt="">
+                                            </div>
+                                            <div class="liLeftBox">
+                                                <div class="chatBoxDiv">访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分访问飞娃儿分</div>
+                                            </div>
+                                        </li>
+-->
+                                    </ul>
+
+                                </div>
+                                <textarea name="" id="charBoxRtBt" cols="30" rows="10" class="charBoxRtBt">
+
+                                </textarea>
+                                <div class="setCont">发送</div>
+                                <div class="exitCont">退出</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- FOOTER -->
+            <%- include('../public/user/footer.ejs') %>
+                <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+                <script>
+                    $('.nav a').eq(4).addClass('active');
+                    $('#username').html('亲爱的' + localStorage.userName + ', 欢迎您来到猫咪聊天室! 请您文明发言！ ');
+                    var socket = io();
+                    socket.emit("user", {
+                        "headImg": localStorage.headImg,
+                        "name": localStorage.userName,
+                    });
+                    socket.on("user", function (userList) {
+                        var _html = '';
+                        for (var i in userList) {
+                            _html += '<li>';
+                            _html += '<img src="' + userList[i].headImg + '" alt=""><span>' + userList[i].name + '</span>';
+                            _html += '</li>';
+                        }
+                        $("#userUl").html(_html)
+                    });
+                    $(".setCont").on('click', function () {
+                        //把文本框的内容上传：
+                        if ($.trim($("#charBoxRtBt").val()) == '') {
+                            layer.msg('内容不能为空')
+                            return;
+                        }
+                        socket.emit("msg", {
+                            "headImg": localStorage.headImg,
+                            "name": localStorage.userName,
+                            "msgCont": $("#charBoxRtBt").val()
+                        });
+                        $("#charBoxRtBt").val("");
+
+                    });
+                    $(".exitCont").on('click', function () {
+                        //把文本框的内容上传：
+                        socket.emit("exit", {
+                            "headImg": localStorage.headImg,
+                            "name": localStorage.userName
+                        });
+                        location.href = '/';
+                    });
+
+                    socket.on("msg", function (msg) {
+                        var _html = '';
+                        if(msg.name==localStorage.userName){
+                            _html += '<li>';
+                            _html += '<div class="liRightImgBox">';
+                            _html += '<img src="' + msg.headImg + '" alt="">';
+                            _html += '</div>';
+                            _html += '<div class="liLeftBox">';
+                            _html += '<div class="chatBoxDiv">' + msg.msgCont + '</div>';
+                            _html += '</div>';
+                            _html += '</li>';
+                        }
+                        else{
+                            _html += '<li>'
+                            _html += '<div class = "liLeftImgBox">';
+                            _html += '<img src = "' + msg.headImg + '" alt = "" >';
+                            _html += '</div>';
+                            _html += '<div class = "liRightBox" >';
+                            _html += '<span>' + msg.name + ' :</span> <div class = "chatBoxDiv" >' + msg.msgCont + '</div> </div>';
+                            _html += '</li>';   
+                        }
+                        $("#msgBoxAppend").append(_html);
+                        $('.charBoxRtTop').scrollTop( $('.charBoxRtTop')[0].scrollHeight );
+                    });
+                </script>
+    </body>
+
+</html>

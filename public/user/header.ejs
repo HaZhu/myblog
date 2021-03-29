@@ -1,0 +1,31 @@
+<header class="container">
+    <div class="site-branding" id="headerTest">
+        <h1 class="site-title">
+            <a href="/login">登录</a>
+        </h1>
+        <h2 class="site-description"><a href="/register" style="color:#fff">注册</a></h2>
+    </div>
+    <div class="social-links">
+        <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_qzone"></a>
+            <a class="bds_douban"></a>
+            <a class="bds_xg"></a>
+            <span class="bds_more"></span>
+            <a class="shareCount"></a>
+        </div>
+    </div>
+    
+</header>
+<script>
+    if (!localStorage.userName) {
+        localStorage.userName = "";
+    }
+    if (localStorage.userName != "") {
+        $("#headerTest h2").hide();
+        $("#headerTest h1 a").html(localStorage.userName+',欢迎您来到猫咪的个人网站！').attr('href','/contact');
+        $("#headerTest h1.site-title").css('border-right','0');
+    }
+</script>

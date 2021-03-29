@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">博客列表</h2>
+                            <a href="setBlock" class="fr top_rt_btn add_icon">添加博客</a>
+                        </div>
+                        <section class="mtb">
+                            <select class="select">
+                                <option>搜索名称</option>
+                                <option>搜索作者</option>
+                            </select>
+                            <input type="text" class="textbox textbox_225" placeholder="输入博客名称或者作者" />
+                            <input type="button" value="查询" class="group_btn" />
+                        </section>
+                        <table class="table">
+                            <tr>
+                                <th>博客ID</th>
+                                <th>缩略图</th>
+                                <th>博客名称</th>
+                                <th>作者名称</th>
+                                <th>发布时间</th>
+                                <th>点赞人数</th>
+                                <th>反赞人数</th>
+                                <th>是否推荐</th>
+                                <th>操作</th>
+                            </tr>
+                            <% data.forEach(function(datas){ %>
+                                <tr class="everyTr">
+                                    <td>
+                                        <%=datas.id%>
+                                    </td>
+                                    <td class="center"><img src="/<%=datas.blogImg%>" width="50" height="50" /></td>
+                                    <td>
+                                        <%=datas.blogName%>
+                                    </td>
+                                    <td class="center">
+                                        <%=datas.aditorName%>
+                                    </td>
+                                    <td class="center">
+                                        <%=datas.blogTime%>
+                                    </td>
+                                    <td class="center">
+                                        <%=datas.agree%>
+                                    </td>
+                                    <td class="center">
+                                        <%=datas.Disapproval%>
+                                    </td>
+                                    <td class="center">
+                                        <%=datas.recommended%>
+                                    </td>
+                                    <td class="center">
+                                        <a href="/single:<%=datas.id%>" title="预览" class="link_icon" target="_blank">&#118;</a>
+                                        <a href="/admin/editeInfo:<%=datas.id%>" title="编辑" class="link_icon">&#101;</a>
+                                        <a href="#" title="删除" data-delId='<%=datas.id%>' class="link_icon delete">&#100;</a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                        <!--
+                        <aside class="paging">
+                            <a>第一页</a>
+                            <a>1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>…</a>
+                            <a>1004</a>
+                            <a>最后一页</a>
+                        </aside>
+-->
+                    </div>
+                </section>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".editeBlock").addClass('active');
+                    $('.delete').on('click', function () {
+                        var _this = $(this);
+                        var _id = _this.attr('data-delId');
+                        layer.confirm('您确定删除这条博客吗？', {
+                            btn: ['我确定', '点错了'] //按钮
+                        }, function () {
+                            $.ajax({
+                                type: 'post',
+                                dataType: 'json',
+                                url: '/api_admin_deleteBlog',
+                                data: {
+                                    'id': _id
+                                },
+                                success: function (res) {
+                                    if (res.status == 1) {
+                                        layer.msg('删除成功！', {
+                                            icon: 6
+                                        });
+                                        _this.parents('.everyTr').remove();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            icon: 5
+                                        })
+                                    }
+                                }
+                            })
+                        });
+
+                    })
+                </script>
+    </body>
+
+</html>

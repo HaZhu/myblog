@@ -1,0 +1,147 @@
+<html>
+<%- include('../public/user/head.ejs') %>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-image: #1A1C1E;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #222;
+            position: relative;
+            width: 100%;
+        }
+        
+        #code {
+            width: 40%;
+            min-width: 450px;
+            height: 450px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: fixed;
+            left: 30%;
+            top: 20%;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 22px;
+            font-weitht: bold;
+        }
+        
+        #author {
+            position: fixed;
+            bottom: 10px;
+            left: 48%;
+        }
+        
+        #author a {
+            text-decoration: none;
+        }
+        
+        .key {
+            color: orange;
+            font-family: '';
+        }
+        
+        .comment {
+            color: #e6e6e6;
+            font-weight: 800;
+        }
+        
+        #megBoardSnowBox {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <body class="sub-page">
+        <%- include('../public/user/nav.ejs') %>
+            <div id="page-content">
+                <section class="box-content box-1">
+                    <div class="container" style="padding-top:180px">
+                        <div class="row">
+                            <div class="col-md-4">
+                              
+                               <% dataOne.forEach(function(datas){ %>  
+                                    <div class="box-item msgBox">
+                                        <img src="<%=datas.mgsBcImg%>" class="img-responsive BoxImgbg" />
+                                        <img src="<%=datas.headImgShow%>" alt="" class="userHead">
+                                        <div class="msgBoxContent">
+                                            <h5><%=datas.msgTitle%></h5>
+                                            <p><%=datas.msgContent%></p>
+                                            <span>留言时间：<%=datas.msgTime%></span>
+                                            <address>来自：<%=datas.msgFrom%></address>
+                                            <address>联系方式：<%=datas.msgUserNumber%></address>
+                                        </div>
+                                    </div>
+                               <% }) %> 
+                               
+                            </div>
+                            <div class="col-md-4">
+                                 <% dataTwo.forEach(function(datas){ %>  
+                                    <div class="box-item msgBox">
+                                        <img src="<%=datas.mgsBcImg%>" class="img-responsive BoxImgbg" />
+                                        <img src="<%=datas.headImgShow%>" alt="" class="userHead">
+                                        <div class="msgBoxContent">
+                                            <h5><%=datas.msgTitle%></h5>
+                                            <p><%=datas.msgContent%></p>
+                                            <span>留言时间：<%=datas.msgTime%></span>
+                                            <address>来自：<%=datas.msgFrom%></address>
+                                            <address>联系方式：<%=datas.msgUserNumber%></address>
+                                        </div>
+                                    </div>
+                                <% }) %> 
+                            </div>
+                            <div class="col-md-4">
+                                 <% dataThree.forEach(function(datas){ %>  
+                                    <div class="box-item msgBox">
+                                        <img src="<%=datas.mgsBcImg%>" class="img-responsive BoxImgbg" />
+                                        <img src="<%=datas.headImgShow%>" alt="" class="userHead">
+                                        <div class="msgBoxContent">
+                                            <h5><%=datas.msgTitle%></h5>
+                                            <p><%=datas.msgContent%></p>
+                                            <span>留言时间：<%=datas.msgTime%></span>
+                                            <address>来自：<%=datas.msgFrom%></address>
+                                            <address>联系方式：<%=datas.msgUserNumber%></address>
+                                        </div>
+                                    </div>
+                               <% }) %> 
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div style="display: none;" id="rocket-to-top">
+                <div style="opacity:0;display: block;" class="level-2"></div>
+                <div class="level-3"></div>
+            </div>
+            <script>
+                $('.nav a').eq(2).addClass('active');
+            </script>
+            <script src="user/megBoard/js/ThreeCanvas.js"></script>
+            <script src="user/megBoard/js/Snow.js"></script>
+            <script src="user/megBoard/js/snowFall.js"></script>
+            <script>
+                $.snowFall({
+                    //创建粒子数量，密度
+                    particleNo: 500,
+                    //粒子下拉速度
+                    particleSpeed: 30,
+                    //粒子在垂直（Y轴）方向运动范围
+                    particleY_Range: 1300,
+                    //粒子在垂直（X轴）方向运动范围
+                    particleX_Range: 1000,
+                    //是否绑定鼠标事件
+                    bindMouse: false,
+                    //相机离Z轴原点距离
+                    zIndex: 600,
+                    //摄像机视野角度
+                    angle: 55,
+                    wind_weight: 2 //风向
+                });
+            </script>
+    </body>
+
+</html>

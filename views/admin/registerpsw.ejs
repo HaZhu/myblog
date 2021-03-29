@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">修改密码</h2>
+                            <a class="fr top_rt_btn">返回起始页</a>
+                        </div>
+                        <section>
+                            <ul class="ulColumn2">
+                                <li>
+                                    <span class="item_name">原始密码：</span>
+                                    <input type="text" class="textbox textbox_295 oldPsw" placeholder="原始密码..." />
+                                    <span class="errorTips">原始密码不能为空</span>
+                                </li>
+                                <li>
+                                    <span class="item_name">新密码：</span>
+                                    <input type="password" class="textbox textbox_295 newPsw" placeholder="新密码..." />
+                                    <span class="errorTips">新密码不能为空</span>
+                                </li>
+                                <li>
+                                    <span class="item_name">确认新密码：</span>
+                                    <input type="password" class="textbox textbox_295 reNewPsw" placeholder="确认新密码..." />
+                                    <span class="errorTips">确认密码不能为空</span>
+                                </li>
+                                <li>
+                                    <input type="button" class="link_btn" value="更新/保存" />
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+                <script>
+                    $('.link_btn').on('click', function() {
+                        var _data = {
+                            'oldpassword': $('.oldPsw').val(),
+                            'newpassword': $('.newPsw').val(),
+                            'renewpassword': $('.reNewPsw').val()
+                        }
+                        if ($('.newPsw').val() != $('.reNewPsw').val()) {
+                            layer.msg('两次密码不一样')
+                        } else {
+                            $.ajax({
+                                type: 'post',
+                                dataType: 'json',
+                                url: '/api_admin_repassword',
+                                data: _data,
+                                success: function(res) {
+                                    if (res.status == 1) {
+                                        layer.msg(res.data, {
+                                            icon: 6
+                                        })
+                                    } else {
+                                        layer.msg(res.data, {
+                                            icon: 5
+                                        })
+                                    }
+                                },
+                                error: function(err) {
+                                    console.log(err)
+                                }
+                            })
+                        }
+                    })
+
+                </script>
+    </body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">博客编辑列表</h2>
+                            <a href="editeBlock" class="fr top_rt_btn">返回起始页</a>
+                        </div>
+                        <section>
+                            <ul class="ulColumn2">
+                                <li>
+                                    <span class="item_name">博客名称：</span>
+                                    <input type="text" id="blogName" class="textbox textbox_295" value="<%=thisBlog.blogName%>" />
+                                </li>
+                                <li>
+                                    <span class="item_name">作者名称：</span>
+                                    <input type="text" id="aditorName" class="textbox textbox_295" value="<%=thisBlog.aditorName%>" />
+                                </li>
+                                <li>
+                                    <span class="item_name">是否推荐：</span>
+                                    <input type="text" id="recommended" class="textbox textbox_295" value="<%=thisBlog.recommended%>" />
+                                </li>
+                                <li>
+                                    <span class="item_name">博客首图：</span>
+                                    <label class="uploadImg" style="padding:0;border:0">
+                                        <input type="file" id="exampleInputFile" />
+                                        <img src="/<%=thisBlog.blogImg%>"  style="width:80px;height:80px;" id="ImgPr">
+                                    </label>
+                                </li>
+                                <li>
+                                    <span class="item_name"></span>
+                                    <input type="button" data-blogId='<%=thisBlog.id%>' class="link_btn" id="updataNow" value="更新" />
+                                </li>
+                            </ul>
+                        </section>
+                        <textarea name="area" style="width: 100%;">
+                            <%=thisBlog.blogContent%>
+                        </textarea>
+                    </div>
+                </section>
+                <script type="text/javascript" src="nicEdit/nicEdit.js"></script>
+                <script src="js/imgView.js"></script>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".editeBlock").addClass('active');
+                    bkLib.onDomLoaded(function () {
+                        nicEditors.allTextAreas()
+                    });
+                    $("#exampleInputFile").uploadPreview({
+                        Img: "ImgPr",
+                        Width: 10,
+                        Height: 10
+                    });
+                    $('#updataNow').on('click',function(){
+                         if ($.trim($('#aditorName').val()) == '') {
+                            layer.msg('作者不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        } else if ($.trim($('#blogName').val()) == '') {
+                            layer.msg('博客名不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        } else if ($.trim($(".nicEdit-main").html())== '') {
+                            layer.msg('内容不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        }
+                        var _data = new FormData();
+                        _data.append("blogImg", $('#exampleInputFile')[0].files[0]);
+                        _data.append("aditorName", $.trim($('#aditorName').val()));
+                        _data.append("blogName", $.trim($('#blogName').val()));
+                        _data.append("recommended", $.trim($('#recommended').val()));
+                        _data.append("blogContent", $(".nicEdit-main").html());
+                        _data.append("id", $(this).attr('data-blogId'));
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: '/api_admin_updateBlog',
+                            processData: false,
+                            contentType: false,
+                            data: _data,
+                            success: function (res) {
+                                if (res.status == 1) {
+                                    layer.msg('更新成功！', {
+                                        icon: 6
+                                    });
+                                    setTimeout(function(){
+                                        location.href='/admin/editeBlock';
+                                    },1000)
+                                } else {
+                                    layer.msg(res.data, {
+                                        icon: 5
+                                    })
+                                }
+                            }
+                        })
+                    })
+                </script>
+    </body>
+
+</html>

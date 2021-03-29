@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">会员详情</h2>
+                        </div>
+                        <ul class="ulColumn2">
+                            <li>
+                                <span class="item_name">上传头像：</span>
+                                <label class="uploadImg" style="padding:0;border:0">
+                                    <input type="file" id="headImg" />
+                                    <img src="/<%=thisuser.headImg%>" style="width:80px;height:80px;" id="ImgPr">
+                                </label>
+                            </li>
+                            <li>
+                                <span class="item_name">会员昵称：</span>
+                                <input type="text" class="textbox textbox_225"  id="nickname" placeholder="会员昵称" value="<%=thisuser.nickname%>" />
+                            </li>
+                            <li>
+                                <span class="item_name">手机号码：</span>
+                                <input type="tel" class="textbox textbox_225" value="<%=thisuser.phoneNunber%>"  id="tel"/>
+                            </li>
+                            <li>
+                                <span class="item_name">婚姻状况：</span>
+                                <input type="text" class="textbox textbox_225" value="<%=thisuser.marriage%>" disabled="true"/>
+                            </li>
+                            <li>
+                                <span class="item_name">会员性别：</span>
+                                <input type="text" class="textbox textbox_225" value="<%=thisuser.gender%>" disabled="true"/>
+                            </li>
+                            <li>
+                                <span class="item_name">会员学历：</span>
+                                <input type="text" class="textbox textbox_225" value="<%=thisuser.studyInfo%>" disabled="true"/>
+                            </li>
+                            <li>
+                                <span class="item_name">会员账号：</span>
+                                <input type="text" id="username" class="textbox textbox_225" value="<%=thisuser.username%>"/>
+                            </li>
+                            <li>
+                                <span class="item_name">会员密码：</span>
+                                <input type="password" id="passwrod" class="textbox textbox_225" value="<%=thisuser.password%>"/>
+                            </li>
+                            <li>
+                                <span class="item_name">会员地址：</span>
+                                <input type="text" id="address" class="textbox textbox_295" value="<%=thisuser.address%>"/>
+                            </li>
+                            <li>
+                                <span class="item_name"></span>
+                                <input type="button" class="link_btn updataUser" value="更新" data-userId='<%=thisuser.id%>' data-nickname='<%=thisuser.nickname%>' data-phoneNunber='<%=thisuser.phoneNunber%>' data-username='<%=thisuser.username%>'/>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <script src="js/imgView.js"></script>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".userAdd").addClass('active');
+                    $('.updataUser').on('click', function() {
+                        var _data = new FormData();
+                        _data.append("id",$(this).attr('data-userId'));
+                        _data.append("oldnickname",$(this).attr('data-nickname'));
+                        _data.append("oldphoneNunber",$(this).attr('data-phoneNunber'));
+                        _data.append("oldusername",$(this).attr('data-username'));
+                        _data.append("username", $.trim($('#username').val()));
+                        _data.append("passwrod", $.trim($('#passwrod').val()));
+                        _data.append("nickname", $.trim($('#nickname').val()));
+                        _data.append("address", $.trim($('#address').val()));
+                        _data.append("phoneNunber", $.trim($('#tel').val()));
+                        _data.append("headImg", $('#headImg')[0].files[0]);
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: '/api_admin_updateUser',
+                            processData: false,
+                            contentType: false,
+                            data: _data,
+                            success: function(res) {
+                                if (res.status == 1) {
+                                    layer.msg('更新成功！', {
+                                        icon: 6
+                                    });
+                                    setTimeout(function(){
+                                        location.href='/admin/userList';
+                                    },1000)
+                                } else {
+                                    layer.msg(res.data, {
+                                        icon: 5
+                                    })
+                                }
+                            }
+                        })
+
+                    })
+                    $("#headImg").uploadPreview({
+                        Img: "ImgPr",
+                        Width: 10,
+                        Height: 10
+                    });
+                </script>
+    </body>
+
+</html>

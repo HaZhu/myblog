@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">商品列表示例</h2>
+                            <a href="product_detail.html" class="fr top_rt_btn add_icon">添加商品</a>
+                        </div>
+                        <section class="mtb">
+                            <select class="select">
+                                <option>搜索名称</option>
+                                <option>搜索作者</option>
+                                <option>联系方式</option>
+                            </select>
+                            <input type="text" class="textbox textbox_225" placeholder="输入留言名称或者作者或电话" />
+                            <input type="button" value="查询" class="group_btn" />
+                        </section>
+                        <table class="table">
+                            <tr>
+                                <th>留言ID</th>
+                                <th>缩略图</th>
+                                <th>留言名称</th>
+                                <th>作者名称</th>
+                                <th>发布时间</th>
+                                <th>联系方式</th>
+                                <th>内容简介</th>
+                                <th>操作</th>
+                            </tr>
+                            <% data.forEach(function(datas){ %>
+                            <tr class="everyTr">
+                                <td class="center"><%=datas.id%></td>
+                                <td class="center"><img src="/<%=datas.mgsBcImg%>" width="50" height="50" /></td>
+                                <td><%=datas.msgTitle%></td>
+                                <td class="center"><%=datas.msgFrom%></td>
+                                <td class="center"><%=datas.msgTime%></td>
+                                <td class="center"><%=datas.msgUserNumber%></td>
+                                <td class="center"><%=datas.msgContent%></td>
+                                <td class="center">
+                                    <a href="#" title="删除" class="link_icon delete" data-delId='<%=datas.id%>'>&#100;</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </table>
+<!--
+                        <aside class="paging">
+                            <a>第一页</a>
+                            <a>1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>…</a>
+                            <a>1004</a>
+                            <a>最后一页</a>
+                        </aside>
+-->
+                    </div>
+                </section>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".editeMessage").addClass('active');
+                    $('.delete').on('click', function () {
+                        var _this = $(this);
+                        var _id = _this.attr('data-delId');
+                        layer.confirm('您确定删除这条留言吗？', {
+                            btn: ['我确定', '点错了'] //按钮
+                        }, function () {
+                            $.ajax({
+                                type: 'post',
+                                dataType: 'json',
+                                url: '/api_admin_deleteMsg',
+                                data: {
+                                    'id': _id
+                                },
+                                success: function (res) {
+                                    if (res.status == 1) {
+                                        layer.msg('删除成功！', {
+                                            icon: 6
+                                        });
+                                        _this.parents('.everyTr').remove();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            icon: 5
+                                        })
+                                    }
+                                }
+                            })
+                        });
+
+                    })
+                </script>
+    </body>
+
+</html>

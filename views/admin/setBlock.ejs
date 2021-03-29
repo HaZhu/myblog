@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">博客编辑列表</h2>
+                            <a class="fr top_rt_btn">返回起始页</a>
+                        </div>
+                        <section>
+                            <ul class="ulColumn2">
+                                <li>
+                                    <span class="item_name">博客名称：</span>
+                                    <input type="text" id="blogName" class="textbox textbox_295" placeholder="博客名称..." />
+                                </li>
+                                <li>
+                                    <span class="item_name">作者名称：</span>
+                                    <input type="text" id="aditorName" class="textbox textbox_295" placeholder="作者名称..." />
+                                </li>
+                                <li>
+                                    <span class="item_name">推荐到首页：</span>
+                                    <input type="text" id="recommended" class="textbox textbox_295" placeholder="填'是'或者'否'..." />
+                                </li>
+                                <li>
+                                    <span class="item_name">博客首图：</span>
+                                    <label class="uploadImg" style="padding:0;border:0">
+                                        <input type="file" id="blogImg" />
+                                        <img src="images/upload.png"  style="width:80px;height:80px;" id="ImgPr">
+                                    </label>   
+                                </li>
+                                <li>
+                                    <span class="item_name"></span>
+                                    <input type="button" class="link_btn" id="save" value="保存" />
+                                </li>
+                            </ul>
+                        </section>
+                        <textarea name="area" style="width: 100%;">
+
+                        </textarea>
+                    </div>
+                </section>
+                <script src="js/imgView.js"></script>
+                <script type="text/javascript" src="nicEdit/nicEdit.js"></script>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".setBlock").addClass('active');
+                    bkLib.onDomLoaded(function () {
+                        nicEditors.allTextAreas()
+                    });
+                    $("#save").on('click', function () {
+                        if ($.trim($('#aditorName').val()) == '') {
+                            layer.msg('作者不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        } else if ($.trim($('#blogName').val()) == '') {
+                            layer.msg('博客名不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        } else if ($.trim($(".nicEdit-main").html())== '') {
+                            layer.msg('内容不能为空！', {
+                                icon: 5
+                            });
+                            return;
+                        }
+                        var _data = new FormData();
+                        _data.append("blogImg", $('#blogImg')[0].files[0]);
+                        _data.append("aditorName", $.trim($('#aditorName').val()));
+                        _data.append("blogName", $.trim($('#blogName').val()));
+                        _data.append("recommended", $.trim($('#recommended').val()));
+                        _data.append("blogContent", $(".nicEdit-main").html());
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: '/api_admin_addBlog',
+                            processData: false,
+                            contentType: false,
+                            data: _data,
+                            success: function (res) {
+                                if (res.status == 1) {
+                                    layer.msg('发布成功！去看看吧！', {
+                                        icon: 6
+                                    });
+                                    $('#aditorName').val('');
+                                    $('#blogName').val('');
+                                    $(".nicEdit-main").html('');
+                                } else {
+                                    layer.msg(res.data, {
+                                        icon: 5
+                                    })
+                                }
+                            }
+                        })
+
+                    })
+                    $("#blogImg").uploadPreview({
+                        Img: "ImgPr",
+                        Width: 10,
+                        Height: 10
+                    });
+                </script>
+    </body>
+
+</html>

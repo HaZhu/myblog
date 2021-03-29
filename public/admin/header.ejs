@@ -1,0 +1,46 @@
+<header>
+    <h1><img src="images/admin_logo.png"/></h1>
+    <ul class="rt_nav">
+        <li><a href="/" target="_blank" class="website_icon">站点首页</a></li>
+        <li><a href="#" class="clear_icon">清除缓存</a></li>
+        <li><a href="/admin/registerpsw" class="admin_icon">修改密码</a></li>
+        <li><a href="#" class="set_icon">账号设置</a></li>
+        <li><a href="#" class="quit_icon">安全退出</a></li>
+    </ul>
+</header>
+<script>
+    $(".quit_icon").on('click', function () {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/api_session_destroy',
+            data: '',
+            success: function (res) {
+                if (res.status == 1) {
+                    layer.msg(res.data, {
+                        icon: 6
+                    })
+                    setTimeout(function () {
+                        location.href = "/admin";
+                    }, 1000)
+                } else {
+                    layer.msg('退出失败', {
+                        icon: 5
+                    })
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+    $('.clear_icon').on('click', function () {
+        layer.msg('缓存清除成功', {
+            icon: 6
+        })
+        location.reload();
+    })
+    $('.set_icon').on('click', function () {
+        layer.msg('您没有权限！')
+    })
+</script>

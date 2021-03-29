@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('../../public/admin/head.ejs') %>
+
+    <body>
+        <%- include('../../public/admin/header.ejs') %>
+            <%- include('../../public/admin/aside.ejs') %>
+                <section class="rt_wrap content mCustomScrollbar">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">会员列表</h2>
+                            <a href="userAdd"  class="fr top_rt_btn add_icon">添加新会员</a>
+                        </div>
+                        <section class="mtb">
+                            <select class="select">
+                                <option>会员昵称</option>
+                                <option>手机号码</option>
+                                <option>会员地址</option>
+                                <option>会员性别</option>
+                                <option>会员邮箱</option>
+                                <option>婚姻状况</option>
+                                <option>学历搜索</option>
+                            </select>
+                            <input type="text" class="textbox textbox_225" placeholder="输入会员号/手机/电子邮件查询..." />
+                            <input type="button" value="查询" class="group_btn" />
+                        </section>
+                        <table class="table">
+                            <tr>
+                                <th>会员ID</th>
+                                <th>会员头像</th>
+                                <th>会员昵称</th>
+                                <th>手机号码</th>
+                                <th>会员地址</th>
+                                <th>会员性别</th>
+                                <th>用户名</th>
+                                <th>婚姻状况</th>
+                                <th>会员学历</th>
+                                <th>操作</th>
+                            </tr>
+                            <% data.forEach(function(datas){ %>
+                            <tr class="everyTr">
+                                <td class="center"><%=datas.id%></td>
+                                <td class="center"><img src="/<%=datas.headImg%>"  width="50" height="50" /></td>
+                                <td><%=datas.nickname%></td>
+                                <td class="center"><%=datas.phoneNunber%></td>
+                                <td class="center"><%=datas.address%></td>
+                                <td class="center"><%=datas.gender%></td>
+                                <td class="center"><%=datas.username%></td>
+                                <td class="center">
+                                    <%=datas.marriage%>
+                                </td>
+                                <td class="center">
+                                   <%=datas.studyInfo%>
+                                </td>
+                                <td class="center">
+                                    <a href="/admin/userDetail:<%=datas.id%>"  title="编辑" class="link_icon">&#101;</a>
+                                    <a href="#" title="删除" class="link_icon delete" data-delId='<%=datas.id%>'>&#100;</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </table>
+<!--
+                        <aside class="paging">
+                            <a>第一页</a>
+                            <a>1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>…</a>
+                            <a>1004</a>
+                            <a>最后一页</a>
+                        </aside>
+-->
+                    </div>
+                </section>
+                <script>
+                    $('#asideUl a').removeClass('active');
+                    $(".userList").addClass('active');
+                     $('.delete').on('click', function () {
+                        var _this = $(this);
+                        var _id = _this.attr('data-delId');
+                        layer.confirm('您确定删除这个会员吗？', {
+                            btn: ['我确定', '点错了'] //按钮
+                        }, function () {
+                            $.ajax({
+                                type: 'post',
+                                dataType: 'json',
+                                url: '/api_admin_deleteUser',
+                                data: {
+                                    'id': _id
+                                },
+                                success: function (res) {
+                                    if (res.status == 1) {
+                                        layer.msg('删除成功！', {
+                                            icon: 6
+                                        });
+                                        _this.parents('.everyTr').remove();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            icon: 5
+                                        })
+                                    }
+                                }
+                            })
+                        });
+
+                    })
+                </script>
+    </body>
+
+</html>

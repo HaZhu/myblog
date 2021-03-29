@@ -1,0 +1,75 @@
+<html>
+<%- include('../public/user/head.ejs') %>
+
+    <body class="sub-page">
+        <%- include('../public/user/nav.ejs') %>
+
+            <div class="site-gradients">
+                <div class="site-gradients-media">
+                    <figure>
+                        <img src="Another%20Yosemite%20short%20movie%20project%20%E2%80%93%20Modern_files/PcLGXNjMTdiFVKTrElCl__DSC2245.jpg" height="1080" width="1617">
+                    </figure>
+                </div>
+            </div>
+
+            <%- include('../public/user/header.ejs') %>
+
+                <div id="page-content" class="single-page">
+                    <div class="container">
+                        <div class="row">
+                            <div id="main-content">
+                                <article>
+                                    <img src="<%=thisBlog.blogImg%>" />
+                                    <div class="art-content">
+                                        <h1><%=thisBlog.blogName%></h1>
+                                        <div class="info">作者：
+                                            <%=thisBlog.aditorName%> 时间：
+                                                <%=thisBlog.blogTime%>
+                                        </div>
+                                        <%-thisBlog.blogContent%>
+                                    </div>
+                                </article>
+                                <div class="widget wid-related">
+                                    <div class="heading">
+                                        <h4>博客推荐</h4></div>
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="wrap-col">
+                                                    <a href="/single:<%=radomBlog[0].id%>"><img src="<%=radomBlog[0].blogImg%>" style="height:240px"/></a>
+                                                    <h4><a href="/single:<%=radomBlog[0].id%>"><%=radomBlog[0].blogName%></a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="wrap-col">
+                                                    <a href="/single:<%=radomBlog[1].id%>"><img src="<%=radomBlog[1].blogImg%>" style="height:240px"/></a>
+                                                    <h4><a href="/single:<%=radomBlog[1].id%>"><%=radomBlog[1].blogName%></a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="wrap-col">
+                                                    <a href="/single:<%=radomBlog[2].id%>"><img src="<%=radomBlog[2].blogImg%>" style="height:240px"/></a>
+                                                    <h4><a href="/single:<%=radomBlog[2].id%>"><%=radomBlog[2].blogName%></a></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <%- include('../public/user/footer.ejs') %>
+                    <script>
+                        $('.nav a').eq(1).addClass('active');
+                    </script>
+                    <script type="text/javascript" id="bdshare_js" data="type=tools"></script>
+                    <script type="text/javascript" id="bdshell_js"></script>
+                    <script type="text/javascript">
+                        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+                    </script>
+    </body>
+
+</html>
