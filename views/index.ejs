@@ -25,6 +25,7 @@
                 <section class="box-content box-1">
                     <div class="container">
                         <div class="row">
+                            <% if (dataOne.length > 0) { %>
                             <div class="col-md-4">
                                 <div class="box-item">
                                     <img src="<%=dataOne[0].blogImg%>" class="img-responsive" />
@@ -39,6 +40,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <% } %>
+                            <% if (dataTwo.length > 0) { %>
+
                             <div class="col-md-4">
                                 <div class="box-item">
                                     <img src="<%=dataTwo[0].blogImg%>" class="img-responsive" />
@@ -53,6 +57,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <% } %>
+                            <% if (dataThree.length > 0) { %>
+
                             <div class="col-md-4">
                                 <div class="box-item">
                                     <img src="<%=dataThree[0].blogImg%>" class="img-responsive" />
@@ -67,6 +74,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <% } %>
+
                         </div>
                     </div>
                 </section>
